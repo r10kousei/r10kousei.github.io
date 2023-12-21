@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <style>
+        table{
+            margin: -10px 0px 0px -8px;
+            width: 101%;
+            height: 99vh;
+            border: 0px;
+        }
+
+        .box{
+            background-color: red;
+            color: yellow;
+            font-size: 0.8em;
+            padding-top: 5px;
+        }
+
+        #dialog {
+            width: 250px;
+            margin: auto;
+            margin-top: 40vh;
+            padding: 30px 20px;
+            display: none;
+            text-align: center;
+            border: 1px solid #aaa;
+            box-shadow: 2px 2px 4px #888;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Danghui_golden_%28pre-1996%29.svg/130px-Danghui_golden_%28pre-1996%29.svg.png" />
+    <title>I love communism</title>
+</head>
+<body>
+    <div id="dialog">
+        <p>あなたの思うこの世の楽園は？</p>
+        <button id="nor">朝鮮民主主義人民共和国</button>
+        <button id="sov">ソビエト連邦</button>
+    </div>
+    <table class="delay-show">
+        <tr class="outbox">
+            <td class='box' style='opacity: 0'><img class='flag' src='' width="100%"></td>
+        </tr>
+    </table>
+
+    <script>
+        var dialog = document.getElementById('dialog');
+        const northcrea = "https://upload.wikimedia.org/wikipedia/commons/5/51/Flag_of_North_Korea.svg";
+        const sovietunion = "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Flag_of_the_Soviet_Union.svg/250px-Flag_of_the_Soviet_Union.svg.png";
+        let audio = null;
+        let audio_path;
+        dialog.style.display = 'block';
+
+    for(i=0;i<4;i++){
+        $('.box').clone().appendTo('.outbox');
+    }
+
+    for(i=0;i<15;i++){
+        $('.outbox').clone().attr('class','clone').appendTo('.delay-show');
+    }
+
+    function start(){
+        document.documentElement.requestFullscreen();
+        dialog.remove();
+        $(function() {
+            audio = new Audio(audio_path);
+
+            setInterval(() => {
+                if(audio) {
+                    audio.play();
+                }
+            }, 100);
+        
+            //location.href='https://www.bamsoftware.com/hacks/zipbomb/zbsm.zip';
+        
+            $('.box')
+                .css({opacity: 0})
+                .each(function(i){
+                    $(this).delay(50 * i).animate({opacity:1}, 25);
+                });
+
+        });
+    }
+
+    $('#nor').on('click', function(){ 
+        audio_path='./congyo.mp3';
+        $('.flag').attr('src', northcrea);
+        start();
+    });
+
+    $('#sov').on('click', function(){ 
+        audio_path='./Sov_Old.mp3';
+        $('.flag').attr('src', sovietunion);
+        start();
+    });
+    </script>
+</body>
+</html>
